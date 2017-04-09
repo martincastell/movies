@@ -3,12 +3,14 @@
 
 ## Initial Component Breakdown
 This is useful to gives us an idea of the structure of the page and some of the main
-components we are going to need for the app. [URL=ComponentBreakdown.png]
+components we are going to need for the app. 
+https://docs.google.com/drawings/d/1FuTy4jfHVppCUjzMFnBufD_v7LJvyiXPm2Uq7rghPYA/edit
 
 ## Initial State Breakdown
 Based on the wire frame, let's try to identify all the data that we need to display in
 our app. This will help us identify the data we are going to need for our app and it's
-a starting point to decide how the state of the store will look like. [URL=StateBreakdown.png]
+a starting point to decide how the state of the store will look like:
+https://docs.google.com/drawings/d/1bLZ5jLliJgNx1oZfdIsItlVAjtergZ4vtX1nBBu9v3g/edit?usp=sharing
 
 ## Design state and create a mock state
 Starting with a mock state lets you try the components without any external data, this allows
@@ -125,7 +127,7 @@ git push -u origin master
 ```
 
 ## Using the mock state
-Lets add some of our fake data into a file (root.js) and import it into the index.js file.
+Lets add our fake data into a file (root.js) and import it into the index.js file.
 I'm doing this in index.js, so that the App.js doesn't need to change later on when we update our state to be in redux. 
 We pass down the state to the App component as a property called `state`. 
 ```
@@ -149,3 +151,33 @@ function App ({state}) {
 }
 ```
 
+## Creating the MovieCarousel
+First we need to decide what information we need in order to render the component(inputs) and the way that 
+we are going to notify to my parent component that something happened (outputs). I'm ignoring the next and previous icons for now.
+https://docs.google.com/drawings/d/10TlIXAZyt7DRAlGwAWFkU5A2ZI7djDpr0DyFyqZP5AQ/edit?usp=sharing
+
+We identified that we need an array of movies as input, and we have to let our parent know whenever someone clicks on one of the movies.
+```
+function MovieCarousel({ movies, onClickMovie }) {
+  return (<div className="movie-carousel">
+    {movies.map((movie) => <div className="movie" key={movie.id} onClick={() => onClickMovie(movie)}>{movie.title}</div>)}
+  </div>);
+}
+```
+
+Then we use the our new component in the App.js:
+```
+import MovieCarousel from './components/MovieCarousel';
+
+function App ({state}) {
+  const movies = state.page.results.map((movieId) => state.entities.movies[movieId]);
+  const onClickMovie = (movie) => console.log('The user clicked on a movie, we need to do something here', movie);
+
+  return (
+    <div className="App">
+      Movies playing near {state.page.location}
+      <MovieCarousel movies={movies} onClickMovie={onClickMovie} />
+    </div>
+  );
+}
+```
