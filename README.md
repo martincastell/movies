@@ -30,11 +30,11 @@ Option A:
 	movies: [ 
 		{
 			id: 1,
-			title: 'The Boss Baby,
+			title: 'The Boss Baby',
 			genres: [ 'Comedy', 'Animation' ],
 			poster: 'https://s-media-cache-ak0.pinimg.com/originals/80/e8/e2/80e8e2758b6215d7efd049dd45ad7955.jpg',
 			rating: 'PG',
-			trailer: 'https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=22&cad=rja&uact=8&ved=0ahUKEwim36ShsJbTAhUL1GMKHbkMD9UQryQI7QIoADAV&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D-5DaJyxF5do&usg=AFQjCNGfhJLVszAV4BlfdHYAUOnzv6FA9g&bvm=bv.152174688,d.cGc',
+			trailer: 'https://www.youtube.com/watch?v=tquIfapGVqs',
 			duration: '1h 38m',
 			images: [
 				'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrgHPEwdxylS7kMaCD037C6YWTeeCRdHe7uc85DIrtNL69Ar1b',
@@ -70,11 +70,11 @@ Option B:
 		movies: {
 			1: {
 				id: 1,
-				title: 'The Boss Baby,
+				title: 'The Boss Baby',
 				genres: [ 'Comedy', 'Animation' ],
 				poster: 'https://s-media-cache-ak0.pinimg.com/originals/80/e8/e2/80e8e2758b6215d7efd049dd45ad7955.jpg',
 				rating: 'PG',
-				trailer: 'https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=22&cad=rja&uact=8&ved=0ahUKEwim36ShsJbTAhUL1GMKHbkMD9UQryQI7QIoADAV&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D-5DaJyxF5do&usg=AFQjCNGfhJLVszAV4BlfdHYAUOnzv6FA9g&bvm=bv.152174688,d.cGc',
+				trailer: 'https://www.youtube.com/watch?v=tquIfapGVqs',
 				duration: '1h 38m',
 				images: [
 					'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrgHPEwdxylS7kMaCD037C6YWTeeCRdHe7uc85DIrtNL69Ar1b',
@@ -98,7 +98,8 @@ Option B:
 }
 ```
 PRO:
-- Extensible, we can later on add a second carousel of movies or a different page that uses the same movies and none of our existing state would need to change.
+- Extensible, we can later on add a second carousel of movies or a different page that uses the same movies and none of our existing state 
+would need to change.
 - The state can be split up into multiple smaller reducers.
 
 CONS: 
@@ -121,5 +122,30 @@ git add README.md
 git commit -m "first commit"
 git remote add origin git@github.com:martincastell/movies.git
 git push -u origin master
+```
+
+## Using the mock state
+Lets add some of our fake data into a file (root.js) and import it into the index.js file.
+I'm doing this in index.js, so that the App.js doesn't need to change later on when we update our state to be in redux. 
+We pass down the state to the App component as a property called `state`. 
+```
+import ROOT_STATE from './state/root';
+
+ReactDOM.render(
+  <App state={ROOT_STATE} />,
+  document.getElementById('root')
+);
+```
+
+I also changed the App component to a functional component, this is not required but functional components feel a little 
+bit more natural to me, I added a property into the page to make sure the state is wired correctly:
+```
+function App ({state}) {
+  return (
+    <div className="App">
+      Movies playing near {state.page.location}
+    </div>
+  );
+}
 ```
 
