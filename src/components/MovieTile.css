@@ -1,0 +1,32 @@
+.movie-tile {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  height: 260px;
+
+  font-size: 13px;
+}
+
+.movie-tile__poster {
+  display: flex;
+  flex: 0 0 182px;
+  margin-bottom: 8px;
+}
+
+.movie-tile__poster > img {
+  width: 100%;
+}
+
+.movie-tile__title {
+  flex: 0 0 auto;
+  margin-bottom: 8px;
+}
+
+.movie-tile__genres {
+  flex: 0 0 auto;
+  color: lightslategray;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

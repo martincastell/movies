@@ -1,0 +1,11 @@
+.movie-carousel {
+  display: flex;
+}
+
+.movie-carousel__item {
+  margin-right: 8px;
+}
+
+.movie-carousel__item:last-of-type {
+  margin-right: 0;
+}

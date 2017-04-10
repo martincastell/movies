@@ -181,3 +181,69 @@ function App ({state}) {
   );
 }
 ```
+
+#Creating the MovieTile component
+For the movie tile component we only need one input (`movie`) and we won't have any outputs. This component is useful because it saves us 
+from writing all this markup whenever we need to display a tile, this will help keeping the MovieCarousel component clean and short.
+```
+function MovieTile({ movie }) {
+  const genres = movie.genres.join(' / ');
+
+  return (<div className="movie-tile">
+    <div className="movie-tile__poster">
+      <img src={movie.poster} alt={movie.title} />
+    </div>
+    <div className="movie-tile__title" title={movie.title}>{movie.title}</div>
+    <div className="movie-tile__genres" title={genres}>{genres}</div>
+  </div>);
+}
+```
+
+Now we can use the MovieTile component in the MovieCarousel component:
+```
+ import MovieTile from './MovieTile';
+ 
+ function MovieCarousel({ movies, onClickMovie }) {
+   return (<div className="movie-carousel">
+     {movies.map((movie) => <div className="movie-carousel__item" key={movie.id}>
+       <MovieTile movie={movie} onClick={() => onClickMovie(movie)} />
+     </div>)}
+   </div>);
+ }
+```
+
+I also added a CSS file for each component in order to make it look a little bit better:
+```
+ .movie-tile {
+   display: flex;
+   flex-direction: column;
+   width: 120px;
+   height: 260px;
+ 
+   font-size: 13px;
+ }
+ 
+ .movie-tile__poster {
+   display: flex;
+   flex: 0 0 182px;
+   margin-bottom: 8px;
+ }
+ 
+ .movie-tile__poster > img {
+   width: 100%;
+ }
+ 
+ .movie-tile__title {
+   flex: 0 0 auto;
+   margin-bottom: 8px;
+ }
+ 
+ .movie-tile__genres {
+   flex: 0 0 auto;
+   color: lightslategray;
+ 
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+ }
+```
