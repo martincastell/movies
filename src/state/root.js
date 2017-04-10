@@ -24,15 +24,29 @@ const ROOT = {
         ],
         scores: [],
         showtimes: []
+      },
+      2: {
+        id: 2,
+        title: 'Beauty and the Beast',
+        genres: [ 'Fantasy', 'Romance' ],
+        poster: 'http://t2.gstatic.com/images?q=tbn:ANd9GcRfYpMZYI-nnFJZ6vmdH7w8qNCp_G2OwqWQqszSdhMbfLR_CHvi',
+        rating: 'PG',
+        trailer: 'https://www.youtube.com/watch?v=tquIfapGVqs',
+        duration: '2h 19m',
+        images: [
+          'http://t2.gstatic.com/images?q=tbn:ANd9GcRfYpMZYI-nnFJZ6vmdH7w8qNCp_G2OwqWQqszSdhMbfLR_CHvi',
+        ],
+        scores: [],
+        showtimes: []
       }
     },
     genres: [ 'Animation', 'Comedy', 'Drama', 'Horror', 'Suspense' ]
   },
   page: {
     isFetching: false,
-    results: [ 1 ],				// This is an array of movie ids.
+    results: [ 1, 2 ],				// This is an array of movie ids.
     location: 'Foster City, CA',
-    genre: 'Comedy',
+    genre: 'All',
     selected: 1				// The id of the selected movie.
   }
 };
