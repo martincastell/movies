@@ -205,8 +205,8 @@ Now we can use the MovieTile component in the MovieCarousel component:
  
  function MovieCarousel({ movies, onClickMovie }) {
    return (<div className="movie-carousel">
-     {movies.map((movie) => <div className="movie-carousel__item" key={movie.id}>
-       <MovieTile movie={movie} onClick={() => onClickMovie(movie)} />
+     {movies.map((movie) => <div className="movie-carousel__item" key={movie.id} onClick={() => onClickMovie(movie)}>
+       <MovieTile movie={movie} />
      </div>)}
    </div>);
  }
