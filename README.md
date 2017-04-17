@@ -326,3 +326,107 @@ We also take this information out from the state and pass it down to our compone
 ```
  let selectedMovieReaction = state.entities.user.movieReactions[state.page.selected];
 ```
+
+#Setting up redux
+It's time to replace our mock root state, first, we'll install redux and react-redux:
+``` 
+npm install --save redux
+npm install --save react-redux
+```
+
+Then we need to create our reducers, each key in our old root state will become a reducer:
+```
+  import {combineReducers} from 'redux';
+  import moviesReducer from './reducers/moviesReducer';
+  import userReducer from './reducers/userReducer';
+  import genresReducer from './reducers/genresReducer';
+  import pageReducer from './reducers/pageReducer';
+  
+  const entitiesReducer = combineReducers({
+    user: userReducer,
+    movies: moviesReducer,
+    genres: genresReducer
+  });
+  
+  const rootReducer = combineReducers({
+    entities: entitiesReducer,
+    page: pageReducer
+  });
+  
+  export default rootReducer;
+```
+
+You can nest reducers using the `combineReducers` function from redux.
+
+Each reducer needs to return an initial state, let's use our mock state as the initial state for now:
+``` 
+import mockRoot from '../mockRoot';
+
+function moviesReducer(state = mockRoot.entities.movies, action) {
+
+
+  return state;
+}
+
+export default moviesReducer;
+
+```
+
+Now we need to setup the store in `index.js`:
+``` 
+...
+import { createStore } from 'redux';
+import {Provider} from 'react-redux';
+import rootReducer from './state/rootReducer';
+...
+
+const store = createStore(rootReducer);
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+```
+In order to connect the app to the store, you need to use the Provider component passing in the store.
+The store is created by passing in a reducer.
+
+# Connecting the App component to redux
+Connect takes in two functions:
+- mapStateToProps receives the state of the store and returns an object with the inputs to the component you are trying to connect.
+```
+ function mapStateToProps(state) {
+   return {
+     location: state.page.location,
+     movies: state.page.results.map((movieId) => state.entities.movies[movieId]),
+     selectedMovie: state.entities.movies[state.page.selected],
+     selectedMovieReaction: state.entities.user.movieReactions[state.page.selected]
+   };
+ }
+```
+
+- mapDispatchToProps receives a `dispatch` function and it should return an object with functions that dispatch actions to the store.
+Let's leave it empty for now and we'll cover it later.
+```
+ function mapDispatchToProps(dispatch) {
+   return {};
+ }
+```
+
+Finally we connect our App component to the store, to do this we need to update the inputs the App component receives and 
+use the connect function from react-redux:
+```
+function App ({location, movies, selectedMovie, selectedMovieReaction}) {
+  const onClickMovie = (movie) => console.log('The user clicked on a movie, we need to do something here', movie);
+  return (
+    <div className="App">
+      Movies playing near {location}
+      <MovieCarousel movies={movies} onClickMovie={onClickMovie} />
+      <MovieDetails movie={selectedMovie} reaction={selectedMovieReaction} />
+    </div>
+  );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+```
+Note that the App inputs match the result from `mapStateToProps`. 

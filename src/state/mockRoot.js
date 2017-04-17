@@ -26,10 +26,10 @@ const ROOT = {
           source: 'IMDB',
           score: '8.9',
         },
-        {
-          source: 'Rotten Tomatoes',
-          score: '70%',
-        }],
+          {
+            source: 'Rotten Tomatoes',
+            score: '70%',
+          }],
         showtimes: []
       },
       2: {
