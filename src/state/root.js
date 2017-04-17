@@ -22,7 +22,14 @@ const ROOT = {
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2fkrgY_Nim3_6N_TiRgkbs4FudqbxW0fLKCMXEtQ9XmfdTLnT',
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI2kgbFR2hgfaImccbGYXJnDUq2F58nBBNYG0_8rK1Kf0ZjZOVBQ'
         ],
-        scores: [],
+        scores: [{
+          source: 'IMDB',
+          score: '8.9',
+        },
+        {
+          source: 'Rotten Tomatoes',
+          score: '70%',
+        }],
         showtimes: []
       },
       2: {

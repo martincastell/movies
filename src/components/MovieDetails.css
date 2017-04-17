@@ -1,0 +1,44 @@
+.movie-details {
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid lightgray;
+}
+
+.movie-details__section {
+  padding: 12px;
+  border-bottom: 1px solid lightgray;
+}
+
+.movie-details__section:last-of-type {
+  border-bottom: 0;
+}
+
+.movie-details-header {
+
+}
+
+.movie-details-header__title {
+  font-size: 24px;
+}
+
+.movie-details-header__sub-title {
+  font-size: 12px;
+  color: lightslategray;
+}
+
+.movie-reactions {
+  display: flex;
+}
+
+.movie-scores {
+  display: flex;
+}
+
+.movie-score {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+

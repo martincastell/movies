@@ -247,3 +247,55 @@ I also added a CSS file for each component in order to make it look a little bit
    text-overflow: ellipsis;
  }
 ```
+
+#Creating the MovieDetails component
+Built a simple version of the MovieDetails component in order to display the selected movie, we'll add more functionality later.
+```
+import React from 'react';
+import './MovieDetails.css';
+
+function MovieDetails({ movie }) {
+  return (<div className="movie-details">
+    <div className="movie-details__section movie-details-header">
+      <div className="movie-details-header__title">{movie.title}</div>
+      <div className="movie-details-header__sub-title">{movie.rating} {movie.genres.join(' / ')}</div>
+    </div>
+
+    <div className="movie-details__section">
+      <a href={movie.trailer} target="_blank">Play trailer</a>
+    </div>
+
+    <div className="movie-details__section movie-reactions">
+      <div>Like</div>
+      <div>Dislike</div>
+    </div>
+
+    <div className="movie-details__section movie-scores">
+      {movie.scores.map(score => <div className="movie-scores__item movie-score" key={score.source}>
+        <div className="movie-score__source">{score.source}</div>
+        <div className="movie-score__score">{score.score}</div>
+      </div>)}
+    </div>
+
+  </div>);
+}
+
+export default MovieDetails;
+```
+
+To add it into our app, we just need to import it, find the selected movie in our state and add it to our template:
+```
+ ...
+ import MovieDetails from './components/MovieDetails';
+ ...
+ let selectedMovie = state.entities.movies[state.page.selected];
+ 
+   return (
+     <div className="App">
+       Movies playing near {state.page.location}
+       <MovieCarousel movies={movies} onClickMovie={onClickMovie} />
+       <MovieDetails movie={selectedMovie} />
+     </div>
+   );
+ ...
+```
