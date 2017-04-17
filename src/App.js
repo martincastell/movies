@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import MovieCarousel from './components/MovieCarousel';
-import MovieDetails from './components/MovieDetails';
+import MovieCarousel from './components/movies/movieCarousel/MovieCarousel';
+import MovieDetails from './components/movies/movieDetails/MovieDetails';
 
 function App ({state}) {
   const movies = state.page.results.map((movieId) => state.entities.movies[movieId]);

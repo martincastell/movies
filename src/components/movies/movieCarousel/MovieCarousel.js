@@ -1,6 +1,6 @@
 import React from 'react';
 import './MovieCarousel.css';
-import MovieTile from './MovieTile';
+import MovieTile from '../movieTile/MovieTile';
 
 function MovieCarousel({ movies, onClickMovie }) {
   return (<div className="movie-carousel">
