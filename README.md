@@ -299,3 +299,30 @@ To add it into our app, we just need to import it, find the selected movie in ou
    );
  ...
 ```
+
+#Creating the UserReaction component
+This component will be used to set and display a reaction (like or dislike) 
+```
+ import React from 'react';
+ import './UserReaction.css';
+ 
+ function UserReaction({ reaction }) {
+   return (<div className="user-reaction">
+     <div className={`user-reaction__option -like ${reaction === 'like' ? 'is-selected' : ''}`}>
+       <i className="fa fa-thumbs-up" aria-hidden="true"></i>
+       Like
+     </div>
+     <div className={`user-reaction__option -dislike ${reaction === 'dislike' ? 'is-selected' : ''}`}>
+       <i className="fa fa-thumbs-down" aria-hidden="true"></i>
+       Dislike
+     </div>
+   </div>);
+ }
+ 
+ export default UserReaction;
+```
+
+We also take this information out from the state and pass it down to our components:
+```
+ let selectedMovieReaction = state.entities.user.movieReactions[state.page.selected];
+```

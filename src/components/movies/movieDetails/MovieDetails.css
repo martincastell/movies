@@ -27,10 +27,6 @@
   color: lightslategray;
 }
 
-.movie-reactions {
-  display: flex;
-}
-
 .movie-scores {
   display: flex;
 }

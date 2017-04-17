@@ -1,0 +1,19 @@
+.user-reaction {
+  display: flex;
+}
+
+.user-reaction__option {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.-like.is-selected {
+  color: darkgreen;
+}
+
+.-dislike.is-selected {
+  color: darkred;
+}

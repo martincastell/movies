@@ -1,7 +1,8 @@
 import React from 'react';
 import './MovieDetails.css';
+import UserReaction from '../../common/userReaction/UserReaction';
 
-function MovieDetails({ movie }) {
+function MovieDetails({ movie, reaction }) {
   return (<div className="movie-details">
     <div className="movie-details__section movie-details-header">
       <div className="movie-details-header__title">{movie.title}</div>
@@ -12,9 +13,8 @@ function MovieDetails({ movie }) {
       <a href={movie.trailer} target="_blank">Play trailer</a>
     </div>
 
-    <div className="movie-details__section movie-reactions">
-      <div>Like</div>
-      <div>Dislike</div>
+    <div className="movie-details__section">
+      <UserReaction reaction={reaction} />
     </div>
 
     <div className="movie-details__section movie-scores">
