@@ -2,7 +2,7 @@ import React from 'react';
 import './MovieDetails.css';
 import UserReaction from '../../common/userReaction/UserReaction';
 
-function MovieDetails({ movie, reaction }) {
+function MovieDetails({ movie, reaction, onMovieReaction }) {
   return (<div className="movie-details">
     <div className="movie-details__section movie-details-header">
       <div className="movie-details-header__title">{movie.title}</div>
@@ -14,7 +14,7 @@ function MovieDetails({ movie, reaction }) {
     </div>
 
     <div className="movie-details__section">
-      <UserReaction reaction={reaction} />
+      <UserReaction reaction={reaction} onReaction={(reaction) => onMovieReaction(movie, reaction)} />
     </div>
 
     <div className="movie-details__section movie-scores">

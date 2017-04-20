@@ -430,3 +430,78 @@ function App ({location, movies, selectedMovie, selectedMovieReaction}) {
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 ```
 Note that the App inputs match the result from `mapStateToProps`. 
+
+# Updating the state
+Only reducers can update the state, whenever we need to do it, we send a message to the reducers asking them to update the state.
+
+The way components can talk to the reducers is through the `mapDispatchToProps` function. This function receives as a parameter a dispatch
+function and returns an object with functions that dispatch actions.
+
+An action is an object that describes what we want the reducers to do, we need to make sure that we include all the information
+the reducer will need to update the state. I have created two actions, the first one updates the selected movie on the page and the 
+second one changes the user reaction to a movie:
+``` 
+export const SELECT_MOVIE = 'SELECT_MOVIE';
+export const REACT_TO_MOVIE = 'REACT_TO_MOVIE';
+
+export function selectMovie(movie) {
+  return { type: SELECT_MOVIE, payload: movie };
+}
+
+export function reactToMovie(movie, reaction) {
+  return { type: REACT_TO_MOVIE, payload: { movie, reaction }};
+}
+```
+
+We use these actions in the `App.js` mapDispatchToProps:
+``` 
+function mapDispatchToProps(dispatch) {
+  return {
+    selectMovie: (movie) => dispatch(selectMovie(movie)),
+    reactToMovie: (movie, reaction) => dispatch(reactToMovie(movie, reaction))
+  };
+}
+```
+
+These functions will be passed into the App component in the same way the props gets passed:
+```
+  ...
+  function App ({location, movies, selectedMovie, selectedMovieReaction, selectMovie, reactToMovie}) {
+  ...
+```
+
+Finally, we need to tell the reducers to do something when they see the actions:
+``` 
+import mockRoot from '../mockRoot';
+import {SELECT_MOVIE} from '../../actions/movies/movieActions';
+
+function pageReducer(state = mockRoot.page, { type, payload }) {
+  switch (type) {
+    case SELECT_MOVIE:
+      return {...state, selected: payload.id };
+      break;
+    default:
+      break;
+  }
+  return state;
+}
+```
+
+Each reducer will receive every action that gets dispatched into the store, but they can choose to react 
+to only the actions that are relevant for that reducer. For example, the userReducer is not interested in the
+ `SELECT_MOVIE` action, so it will return the previous state, because nothing has changed:
+```
+ function userReducer(state = mockRoot.entities.user, { type, payload }) {
+   switch (type) {
+     case REACT_TO_MOVIE:
+       let { movie, reaction } = payload;
+       let movieReactions = { ...state.movieReactions, [movie.id]: reaction };
+       return { ...state, movieReactions: movieReactions };
+       break;
+     default:
+       break;
+   }
+ 
+   return state;
+ }
+```  

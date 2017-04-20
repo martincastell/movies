@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import './App.css';
 import MovieCarousel from './components/movies/movieCarousel/MovieCarousel';
 import MovieDetails from './components/movies/movieDetails/MovieDetails';
+import {reactToMovie, selectMovie} from './actions/movies/movieActions';
 
 function mapStateToProps(state) {
   return {
@@ -14,16 +15,18 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    selectMovie: (movie) => dispatch(selectMovie(movie)),
+    reactToMovie: (movie, reaction) => dispatch(reactToMovie(movie, reaction))
+  };
 }
 
-function App ({location, movies, selectedMovie, selectedMovieReaction}) {
-  const onClickMovie = (movie) => console.log('The user clicked on a movie, we need to do something here', movie);
+function App ({location, movies, selectedMovie, selectedMovieReaction, selectMovie, reactToMovie}) {
   return (
     <div className="App">
       Movies playing near {location}
-      <MovieCarousel movies={movies} onClickMovie={onClickMovie} />
-      <MovieDetails movie={selectedMovie} reaction={selectedMovieReaction} />
+      <MovieCarousel movies={movies} onSelectMovie={selectMovie} />
+      <MovieDetails movie={selectedMovie} reaction={selectedMovieReaction} onMovieReaction={reactToMovie} />
     </div>
   );
 }
