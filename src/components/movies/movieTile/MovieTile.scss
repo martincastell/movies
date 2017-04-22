@@ -1,3 +1,5 @@
+@import "../../shared";
+
 .movie-tile {
   display: flex;
   flex-direction: column;
@@ -24,7 +26,7 @@
 
 .movie-tile__genres {
   flex: 0 0 auto;
-  color: lightslategray;
+  color: color(blueGrey, 400);
 
   white-space: nowrap;
   overflow: hidden;

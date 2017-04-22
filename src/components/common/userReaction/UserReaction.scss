@@ -1,3 +1,5 @@
+@import "../../shared";
+
 .user-reaction {
   display: flex;
 
@@ -18,9 +20,9 @@
 }
 
 .-like.is-selected {
-  color: darkgreen;
+  color: color(green, 800);
 }
 
 .-dislike.is-selected {
-  color: darkred;
+  color: color(red, 800);
 }
