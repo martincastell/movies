@@ -510,3 +510,131 @@ to only the actions that are relevant for that reducer. For example, the userRed
 I followed this guide to convert all of my css to sass: 
 https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-css-preprocessor-sass-less-etc
 
+### Reducing boilerplate code with sass
+Sass lets you chain selectors by nesting them using the `&` operator. 
+This lets you write less code, but the end result will be a flat list of rules.
+``` 
+.movie-details {
+  display: flex;
+  ...
+
+  &__section {
+    padding: 12px;
+    ...
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+}
+```
+
+This compiles to:
+``` 
+.movie-details {
+  display: flex;
+  ...
+}
+.movie-details__section {
+  padding: 12px;
+  ...
+}
+.movie-details__section.is-hidden {
+  display: none;
+}
+
+```
+
+You can also do regular nesting if you want to target a descendant, simply do:
+```
+  .my-parent {
+    color: red;
+    
+    .title {
+      font-size: 20px;
+    }
+    
+    .my-children {
+      color: blue;
+    }    
+  }
+```
+
+This compiles to:
+```
+ .my-parent {
+  color: red;
+ }
+ .my-parent .title {
+  font-size: 20px;
+ }
+ .my-parent .my-children {
+   color: blue;
+ }
+```
+
+### Sass variables
+To declare a variable, use `$[VAR_NAME]` and assign a value. You can then use that variable multiple times.
+```
+ .movie-details {
+   ...
+   $border: 1px solid color(blueGrey, 100);
+   border-top: $border;
+   border-left: $border;
+   border-right: $border;
+ 
+   &__section {
+    ...
+     border-bottom: $border;
+     ...
+   }
+ }
+```
+
+### Sharing variables, functions, placeholders and mixins
+You can create a partial file, which is a sass file that doesn't get compiled into a css file by starting your file name with `_[FILE_NAME]`.
+
+I created a `$palettes` variable which is a map, the key is the name of the palette and the value is another map with the shade and color value
+for the colors in that palette, I took the palettes from material design: https://material.io/guidelines/style/color.html#color-color-palette.
+See `_shared.scss`:
+``` 
+$palettes: (
+  blue: (
+      50: #E3F2FD,
+      100: #BBDEFB,
+      200: #90CAF9,
+      300: #64B5F6,
+      400: #42A5F5,
+      500: #2196F3,
+      600: #1E88E5,
+      700: #1976D2,
+      800: #1565C0,
+      900: #0D47A1
+  ),
+  ...
+  black: (
+    500: #000000
+  ),
+  white: (
+    500: #000000
+  )
+);
+
+```
+
+Then, I created a function to be able to easily obtain the values for the palettes, the shade will default to 500 if not provided:
+```
+@function color($palette, $shade: 500) {
+  @return map-get(map-get($palettes, $palette), $shade);
+}
+```
+
+In order to use this function, I need to import _shared.scss and then I can just call the function:
+``` 
+@import "../../shared";
+.movie-details {
+  color: color(grey, 300);
+  
+  border: 1px solid color(blue);
+}
+```
