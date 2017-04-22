@@ -505,3 +505,8 @@ to only the actions that are relevant for that reducer. For example, the userRed
    return state;
  }
 ```  
+
+# Adding sass
+I followed this guide to convert all of my css to sass: 
+https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-css-preprocessor-sass-less-etc
+

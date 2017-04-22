@@ -1,18 +1,25 @@
 .user-reaction {
-  display: flex; }
+  display: flex;
+}
 
 .user-reaction__option {
   display: flex;
   flex-direction: column;
+
   flex: 1 1 auto;
+
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+}
 
 .user-reaction__option__icon {
-  margin-bottom: 6px; }
+  margin-bottom: 6px;
+}
 
 .-like.is-selected {
-  color: darkgreen; }
+  color: darkgreen;
+}
 
 .-dislike.is-selected {
-  color: darkred; }
+  color: darkred;
+}
