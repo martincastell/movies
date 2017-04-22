@@ -1,19 +1,20 @@
 .user-reaction {
   display: flex;
-}
 
-.user-reaction__option {
-  display: flex;
-  flex-direction: column;
+  &__option {
+    display: flex;
+    flex-direction: column;
 
-  flex: 1 1 auto;
+    flex: 1 1 auto;
 
-  justify-content: center;
-  align-items: center;
-}
+    justify-content: center;
+    align-items: center;
 
-.user-reaction__option__icon {
-  margin-bottom: 6px;
+    &__icon {
+      margin-bottom: 6px;
+    }
+  }
+
 }
 
 .-like.is-selected {
