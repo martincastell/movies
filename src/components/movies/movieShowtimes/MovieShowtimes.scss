@@ -1,0 +1,24 @@
+@import "../../shared";
+
+.movie-showtimes {
+  flex: 3 1 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid color(blueGrey, 200);
+
+  &-header {
+    padding: 12px;
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__sub-title {
+      font-size: 12px;
+      color: color(blueGrey, 400);
+    }
+  }
+
+}

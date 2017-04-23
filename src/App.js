@@ -4,6 +4,7 @@ import './App.css';
 import MovieCarousel from './components/movies/movieCarousel/MovieCarousel';
 import MovieDetails from './components/movies/movieDetails/MovieDetails';
 import {reactToMovie, selectMovie} from './actions/movies/movieActions';
+import MovieShowtimes from './components/movies/movieShowtimes/MovieShowtimes';
 
 function mapStateToProps(state) {
   return {
@@ -26,7 +27,10 @@ function App ({location, movies, selectedMovie, selectedMovieReaction, selectMov
     <div className="App">
       Movies playing near {location}
       <MovieCarousel movies={movies} onSelectMovie={selectMovie} />
-      <MovieDetails movie={selectedMovie} reaction={selectedMovieReaction} onMovieReaction={reactToMovie} />
+      <div className="selected-movie">
+        <MovieShowtimes movie={selectedMovie} />
+        <MovieDetails movie={selectedMovie} reaction={selectedMovieReaction} onMovieReaction={reactToMovie} />
+      </div>
     </div>
   );
 }
