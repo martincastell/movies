@@ -7,7 +7,6 @@ function userReducer(state = mockRoot.entities.user, { type, payload }) {
       let { movie, reaction } = payload;
       let movieReactions = { ...state.movieReactions, [movie.id]: reaction };
       return { ...state, movieReactions: movieReactions };
-      break;
     default:
       break;
   }

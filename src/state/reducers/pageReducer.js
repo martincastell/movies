@@ -5,7 +5,6 @@ function pageReducer(state = mockRoot.page, { type, payload }) {
   switch (type) {
     case SELECT_MOVIE:
       return {...state, selected: payload.id };
-      break;
     default:
       break;
   }
