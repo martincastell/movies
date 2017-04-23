@@ -17,7 +17,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # compiled sass
-/src/**.css
+src/**/*.css
 
 # editor
 .idea
