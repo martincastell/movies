@@ -1,9 +1,29 @@
 @import "components/shared";
 
-.App {
+.app {
   color: color(grey, 900);
-}
+  @include typography(body-1);
 
-.selected-movie {
-  display: flex;
+  &__header {
+    padding: 12px 24px;
+  }
+
+  &__movies {
+    padding: 12px 24px;
+    background: color(grey, 100);
+  }
+
+  &__selected-movie {
+    padding: 12px 24px;
+    display: flex;
+
+    &__showtimes {
+      flex: 3 1 auto;
+
+      margin-right: 12px;
+    }
+    &__details {
+      flex: 1 1 auto;
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import './App.css';
+import './components/typography.css';
 import MovieCarousel from './components/movies/movieCarousel/MovieCarousel';
 import MovieDetails from './components/movies/movieDetails/MovieDetails';
 import {reactToMovie, selectMovie} from './actions/movies/movieActions';
@@ -24,12 +25,20 @@ function mapDispatchToProps(dispatch) {
 
 function App ({location, movies, selectedMovie, selectedMovieReaction, selectMovie, reactToMovie}) {
   return (
-    <div className="App">
-      Movies playing near {location}
-      <MovieCarousel movies={movies} onSelectMovie={selectMovie} />
-      <div className="selected-movie">
-        <MovieShowtimes movie={selectedMovie} />
-        <MovieDetails movie={selectedMovie} reaction={selectedMovieReaction} onMovieReaction={reactToMovie} />
+    <div className="app">
+      <div className="app__header">
+        Movies playing near {location}
+      </div>
+      <div className="app__movies">
+        <MovieCarousel movies={movies} onSelectMovie={selectMovie} />
+      </div>
+      <div className="app__selected-movie">
+        <div className="app__selected-movie__showtimes">
+          <MovieShowtimes movie={selectedMovie} />
+        </div>
+        <div className="app__selected-movie__details">
+          <MovieDetails movie={selectedMovie} reaction={selectedMovieReaction} onMovieReaction={reactToMovie} />
+        </div>
       </div>
     </div>
   );

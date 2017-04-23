@@ -6,7 +6,7 @@
   width: 120px;
   height: 260px;
 
-  font-size: 12px;
+  background: color(white);
 }
 
 .movie-tile__poster {
@@ -19,13 +19,16 @@
   width: 100%;
 }
 
+$tile-padding: 0 12px;
 .movie-tile__title {
   flex: 0 0 auto;
+  padding: $tile-padding;
   margin-bottom: 8px;
 }
 
 .movie-tile__genres {
   flex: 0 0 auto;
+  padding: $tile-padding;
   color: color(blueGrey, 400);
 
   white-space: nowrap;

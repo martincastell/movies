@@ -10,8 +10,8 @@ function MovieDetails({ movie, reaction, onMovieReaction }) {
 
   return (<div className="movie-details">
     <div className="movie-details__section movie-details-header">
-      <div className="movie-details-header__title">{movie.title}</div>
-      <div className="movie-details-header__sub-title">{movie.rating} {movie.genres.join(' / ')}</div>
+      <div className="movie-details-header__title display-1">{movie.title}</div>
+      <div className="movie-details-header__sub-title caption">{movie.rating} {movie.genres.join(' / ')}</div>
     </div>
 
     <div className={classNames('movie-details__section', { 'is-hidden':  hideTrailer })}>

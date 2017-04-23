@@ -63,10 +63,47 @@ $palettes: (
     500: #000000
   ),
   white: (
-    500: #000000
+    500: #FFFFFF
   )
+);
+
+
+$regular-font: Roboto, Arial, sans-serif;
+$medium-font: RobotoMedium, Arial, sans-serif;
+$typography: (
+    display-3: 56px $regular-font,
+    display-2: 45px $regular-font,
+    display-1: 34px $regular-font,
+    headline: 24px $regular-font,
+    title: 20px $medium-font,
+    subheading: (
+        device: 16px $regular-font,
+        desktop: 15px $regular-font,
+    ),
+    body-2: (
+        device: 14px $medium-font,
+        desktop: 13px $medium-font,
+    ),
+    body-1: (
+        device: 14px $regular-font,
+        desktop: 13px $regular-font,
+    ),
+    caption: 12px $regular-font
 );
 
 @function color($palette, $shade: 500) {
   @return map-get(map-get($palettes, $palette), $shade);
+}
+
+@mixin typography($style) {
+  $styleAttrs: map-get($typography, $style);
+  @if type-of($styleAttrs) == map {
+    font: map-get($styleAttrs, desktop);
+  } @else {
+    font: $styleAttrs;
+  }
+}
+
+@function get-typography-styles() {
+  @return map-keys($typography);
 }

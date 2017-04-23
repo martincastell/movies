@@ -638,3 +638,121 @@ In order to use this function, I need to import _shared.scss and then I can just
   border: 1px solid color(blue);
 }
 ```
+
+### Typography 
+Create common classes for typography, I based them on material design typography: 
+https://material.io/guidelines/style/typography.html#typography-styles.
+It's not implemented yet, but we'll add media queries later to change the size of the font
+based on the users's screen size.
+
+```
+$regular-font: Roboto, Arial, sans-serif;
+$medium-font: RobotoMedium, Arial, sans-serif;
+$typography: (
+    display-3: 56px $regular-font,
+    display-2: 45px $regular-font,
+    display-1: 34px $regular-font,
+    headline: 24px $regular-font,
+    title: 20px $medium-font,
+    subheading: (
+        device: 16px $regular-font,
+        desktop: 15px $regular-font,
+    ),
+    body-2: (
+        device: 14px $medium-font,
+        desktop: 13px $medium-font,
+    ),
+    body-1: (
+        device: 14px $regular-font,
+        desktop: 13px $regular-font,
+    ),
+    caption: 12px $regular-font
+);
+
+
+@function get-typography-styles() {
+  @return map-keys($typography);
+}
+
+@mixin typography($style) {
+  $styleAttrs: map-get($typography, $style);
+  @if type-of($styleAttrs) == map {
+    font: map-get($styleAttrs, desktop);
+  } @else {
+    font: $styleAttrs;
+  }
+}
+```
+A mixin is similar to a function, but it will let you generate multiple rules inside of it, 
+those rules will be copied in when you include the mixin:
+```
+@import "shared";
+@each $style in get-typography-styles() {
+  .#{$style} {
+    @include typography($style);
+  }
+}
+```
+
+This compiles to:
+```
+ .display-3 { font: 56px Roboto, Arial, sans-serif; }
+ .display-2 { font: 45px Roboto, Arial, sans-serif; }
+ .display-1 { font: 34px Roboto, Arial, sans-serif; }
+ .headline { font: 24px Roboto, Arial, sans-serif; }
+ .title { font: 20px RobotoMedium, Arial, sans-serif; }
+ .subheading { font: 15px Roboto, Arial, sans-serif; }
+ .body-2 { font: 13px RobotoMedium, Arial, sans-serif; }
+ .body-1 { font: 13px Roboto, Arial, sans-serif; }
+ .caption { font: 12px Roboto, Arial, sans-serif; }
+```
+
+I also made some adjustments to the overall layout:
+``` 
+<div className="app">
+  <div className="app__header">
+    Movies playing near {location}
+  </div>
+  <div className="app__movies">
+    <MovieCarousel movies={movies} onSelectMovie={selectMovie} />
+  </div>
+  <div className="app__selected-movie">
+    <div className="app__selected-movie__showtimes">
+      <MovieShowtimes movie={selectedMovie} />
+    </div>
+    <div className="app__selected-movie__details">
+      <MovieDetails movie={selectedMovie} reaction={selectedMovieReaction} onMovieReaction={reactToMovie} />
+    </div>
+  </div>
+</div>
+```
+And CSS:
+``` 
+.app {
+  color: color(grey, 900);
+  @include typography(body-1);
+
+  &__header {
+    padding: 12px 24px;
+  }
+
+  &__movies {
+    padding: 12px 24px;
+    background: color(grey, 100);
+  }
+
+  &__selected-movie {
+    padding: 12px 24px;
+    display: flex;
+
+    &__showtimes {
+      flex: 3 1 auto;
+
+      margin-right: 12px;
+    }
+    &__details {
+      flex: 1 1 auto;
+    }
+  }
+}
+```

@@ -4,13 +4,14 @@
   display: flex;
 
   &__option {
-    display: flex;
-    flex-direction: column;
-
     flex: 1 1 auto;
 
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    cursor: pointer;
 
     &__icon {
       margin-bottom: 6px;
