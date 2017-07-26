@@ -22,15 +22,29 @@ const ROOT = {
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2fkrgY_Nim3_6N_TiRgkbs4FudqbxW0fLKCMXEtQ9XmfdTLnT',
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI2kgbFR2hgfaImccbGYXJnDUq2F58nBBNYG0_8rK1Kf0ZjZOVBQ'
         ],
-        scores: [{
-          source: 'IMDB',
-          score: '8.9',
-        },
+        scores: [
+          {
+            source: 'IMDB',
+            score: '8.9',
+          },
           {
             source: 'Rotten Tomatoes',
             score: '70%',
-          }],
-        showtimes: []
+          }
+        ],
+
+        showtimes: [
+          {
+            date: '2017-07-25',
+            theatre: 1,
+            times: ['2017-07-25T13:00', '2017-07-25T15:55', '2017-07-25T18:45', '2017-07-25T21:05']
+          },
+          {
+            date: '2017-07-26',
+            theatre: 1,
+            times: ['2017-07-26T13:00']
+          },
+        ],
       },
       2: {
         id: 2,
@@ -47,6 +61,12 @@ const ROOT = {
         showtimes: []
       }
     },
+    theatres: {
+      1: {
+        id: 1,
+        name: 'Cinemark 20'
+      }
+    },
     genres: [ 'Animation', 'Comedy', 'Drama', 'Horror', 'Suspense' ]
   },
   page: {
@@ -54,7 +74,8 @@ const ROOT = {
     results: [ 1, 2 ],				// This is an array of movie ids.
     location: 'Foster City, CA',
     genre: 'All',
-    selected: 1				// The id of the selected movie.
+    selected: 1,      				// The id of the selected movie.
+    selectedDate: new Date().toLocaleDateString('en-US')
   }
 };
 

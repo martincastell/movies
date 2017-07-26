@@ -16,4 +16,25 @@
     }
   }
 
+  &__dates {
+    display: flex;
+    margin: 0px 22px 12px;
+  }
+
+  &__theatres {
+    display: flex;
+  }
+
+}
+
+.showtime-date {
+  cursor: pointer;
+  text-align: center;
+  min-width: 25%;
+
+  &.is-selected {
+    color: color(red, 400);
+    border-bottom: 1px solid color(red, 400);
+  }
+
 }
