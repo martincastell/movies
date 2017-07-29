@@ -1,5 +1,10 @@
 // Adding mock data so that we can build our components without worrying about the state for a while.
 // We can replace this with redux later
+const currentDate = new Date();
+const todayStr = currentDate.toLocaleDateString('en-US');
+currentDate.setDate(currentDate.getDate() - 1);
+const yesterdayStr = currentDate.toLocaleDateString('en-US');
+
 const ROOT = {
   entities: {
     user: {
@@ -35,14 +40,14 @@ const ROOT = {
 
         showtimes: [
           {
-            date: '2017-07-25',
+            date: yesterdayStr,
             theatre: 1,
-            times: ['2017-07-25T13:00', '2017-07-25T15:55', '2017-07-25T18:45', '2017-07-25T21:05']
+            times: [`${yesterdayStr}T13:00`, `${yesterdayStr}T15:55`, `${yesterdayStr}T18:45`, `${yesterdayStr}T21:05`]
           },
           {
-            date: '2017-07-26',
+            date: todayStr,
             theatre: 1,
-            times: ['2017-07-26T13:00']
+            times: [`${todayStr}T13:00`]
           },
         ],
       },

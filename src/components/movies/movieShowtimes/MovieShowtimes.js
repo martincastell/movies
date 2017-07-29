@@ -15,7 +15,10 @@ function ShowtimeDates({movie, selectedDate, selectDate}) {
 function TheatreShowtimes({showtimes}) {
   return <div className="movie-showtimes__theatres">
     { showtimes.map(showtime => <div key={showtime.theatre.id + showtime.date}>
-      {showtime.theatre.name}: {showtime.times.join(', ')}
+      <div className="theatre-showtimes">
+        <div className="theatre-showtimes__name">{showtime.theatre.name}</div>
+        {showtime.times.map(time => <span className="theatre-showtimes__times" key={time}>{time}</span>)}
+      </div>
     </div>) }
   </div>;
 }

@@ -18,7 +18,7 @@
 
   &__dates {
     display: flex;
-    margin: 0px 22px 12px;
+    margin: 0 12px 12px;
   }
 
   &__theatres {
@@ -36,5 +36,18 @@
     color: color(red, 400);
     border-bottom: 1px solid color(red, 400);
   }
+}
 
+.theatre-showtimes {
+  padding: 12px;
+
+  &__name {
+    margin-bottom: 12px;
+    @include typography(title);
+  }
+
+  &__times {
+    display: inline-block;
+    margin-right: 12px;
+  }
 }
