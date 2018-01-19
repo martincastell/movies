@@ -2,7 +2,7 @@ import React from 'react';
 import './MovieTile.css';
 
 function MovieTile({ movie }) {
-  const genres = movie.genres.join(' / ');
+  const genres = movie.genres ? movie.genres.join(' / ') : '';
 
   return (<div className="movie-tile">
     <div className="movie-tile__poster">

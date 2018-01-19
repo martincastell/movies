@@ -1,13 +1,13 @@
 import {FETCH_MOVIES_SUCCESS} from '../../actions/page/pageActions';
 
-function theatresReducer(state = {}, {type, payload}) {
+function showtimesReducer(state = {}, {type, payload}) {
   switch (type) {
     case FETCH_MOVIES_SUCCESS:
-      return {...state, ...payload.entities.theatres};
+      return {...state, ...payload.entities.showtimes};
     default:
       break;
   }
   return state;
 }
 
-export default theatresReducer;
+export default showtimesReducer;

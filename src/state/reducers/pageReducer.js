@@ -1,13 +1,23 @@
-import mockRoot from '../mockRoot';
-import {SELECT_MOVIE, SELECT_DATE} from '../../actions/page/pageActions';
+import {SELECT_MOVIE, SELECT_DATE, FETCH_MOVIES_SUCCESS} from '../../actions/page/pageActions';
 
-function pageReducer(state = mockRoot.page, { type, payload }) {
+const initialState = {
+  isFetching: false,
+  results: [ ],
+  location: 'Foster City, CA',
+  genre: 'All',
+  selected: undefined,
+  selectedDate: undefined
+};
+
+function pageReducer(state = initialState, { type, payload }) {
   switch (type) {
     case SELECT_MOVIE:
       return {...state, selected: payload.id };
     case SELECT_DATE:
       console.log('SELECT_DATE', payload);
       return {...state, selectedDate: payload };
+    case FETCH_MOVIES_SUCCESS:
+      return {...state, results: payload.result };
     default:
       break;
   }
